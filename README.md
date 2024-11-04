@@ -1,7 +1,7 @@
 # Solipath Python/Poetry example project
 This is a quick showcase of using Solipath for a python project
 
-Please note that this uses PyPy, so some libraries will not work such as Pytorch.
+This uses a version of Python sourced from Anaconda which should have better compatibility with python libraries than PyPy
 
 To install poetry dependencies and run tests from the command line:
 ```bash
