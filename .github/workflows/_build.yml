@@ -1,0 +1,33 @@
+name: Build Python
+on:
+  workflow_dispatch:
+  workflow_call:
+jobs:
+  build:
+
+    runs-on: ${{matrix.os}}
+
+    strategy: 
+      matrix:
+        include:
+          - os: macos-latest
+            commandSetupPoetry: ./solipath poetry env use python
+            commandInstallDependencies: ./solipath poetry install
+            commandRunTests: ./solipath poetry run pytest
+          - os: ubuntu-latest
+            commandSetupPoetry: ./solipath poetry env use python
+            commandInstallDependencies: ./solipath poetry install
+            commandRunTests: ./solipath poetry run pytest
+          - os: windows-latest
+            commandSetupPoetry: .\solipath poetry env use python
+            commandInstallDependencies: .\solipath poetry install
+            commandRunTests: .\solipath poetry run pytest
+            
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Poetry
+      run: ${{matrix.commandSetupPoetry}}
+    - name: Install dependencies
+      run: ${{matrix.commandInstallDependencies}}
+    - name: Run tests
+      run: ${{matrix.commandRunTests}}
